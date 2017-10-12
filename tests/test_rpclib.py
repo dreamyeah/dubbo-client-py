@@ -7,14 +7,15 @@ __author__ = 'caozupeng'
 
 if __name__ == '__main__':
     config = ApplicationConfig('test_rpclib')
-    service_interface = 'com.ofpay.demo.api.UserProvider'
+    service_interface = 'com.netease.pop.ic.service.PropertyValueService'
     # 该对象较重，有zookeeper的连接，需要保存使用
-    registry = ZookeeperRegistry('115.28.74.185:2181', config)
+    registry = ZookeeperRegistry('10.165.124.205:2181', config)
     # registry = MulticastRegistry('224.5.6.7:1234', config)
-    user_provider = DubboClient(service_interface, registry, version='2.0')
+    user_provider = DubboClient(service_interface, registry, version='1.0', environment='stable_dev')
+    # print user_provider.getProvinceByCode(123)
     for i in range(1000):
         try:
-            print user_provider.getUser('A003')
+            print user_provider.getProvinceByCode(123)
             # print user_provider.getUser(123)
             # print user_provider.queryUser(
             #     {u'age': 18, u'time': 1428463514153, u'sex': u'MAN', u'id': u'A003', u'name': u'zhangsan'})

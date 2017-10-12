@@ -85,7 +85,7 @@ class Registry(object):
         group = kwargs.get('group', '')
         version = kwargs.get('version', '')
         key = self._to_key(interface, version, group)
-        second = self._service_provides.get(interface, {})
+        second = self._service_providers.get(interface, {})
         return second.get(key, {})
 
     def get_random_provider(self, interface, **kwargs):
@@ -392,27 +392,27 @@ class MulticastRegistry(Registry):
 
 
 if __name__ == '__main__':
-    zk = KazooClient(hosts='192.168.59.103:2181')
+    zk = KazooClient(hosts='10.165.124.205:2181')
     zk.start()
-    parent_node = '{0}/{1}/{2}'.format('dubbo', 'com.ofpay.demo.api.UserProvider', '')
+    parent_node = '{0}/{1}/{2}'.format('dubbo', 'com.netease.pop.ic.service.PropertyValueService', '')
     nodes = zk.get_children(parent_node)
     for child_node in nodes:
         node = urllib.unquote(child_node).decode('utf8')
         print node
-    configurators_node = '{0}/{1}/{2}'.format('dubbo', 'com.ofpay.demo.api.UserProvider', 'configurators')
-    nodes = zk.get_children(configurators_node)
-    for child_node in nodes:
-        node = urllib.unquote(child_node).decode('utf8')
-        print node
-    providers_node = '{0}/{1}/{2}'.format('dubbo', 'com.ofpay.demo.api.UserProvider', 'providers')
+    # configurators_node = '{0}/{1}/{2}'.format('dubbo', 'com.netease.pop.ic.service.PropertyValueService', 'configurators')
+    # nodes = zk.get_children(configurators_node)
+    # for child_node in nodes:
+    #     node = urllib.unquote(child_node).decode('utf8')
+    #     print node
+    providers_node = '{0}/{1}/{2}'.format('dubbo', 'com.netease.pop.ic.service.PropertyValueService', 'providers')
     nodes = zk.get_children(providers_node)
     for child_node in nodes:
         node = urllib.unquote(child_node).decode('utf8')
         print node
-    # zk.delete(parent_node+'/'+child_node, recursive=True)
-    # registry = MulticastRegistry('224.5.6.7:1234')
-    registry = ZookeeperRegistry('zookeeper:2181')
-    registry.subscribe('com.ofpay.demo.api.UserProvider')
-    print registry.get_providers('com.ofpay.demo.api.UserProvider')
+    # # zk.delete(parent_node+'/'+child_node, recursive=True)
+    # # registry = MulticastRegistry('224.5.6.7:1234')
+    # registry = ZookeeperRegistry('10.165.124.205:2181')
+    # registry.subscribe('com.netease.pop.ic.service.PropertyValueService')
+    # print registry.get_providers('com.netease.pop.ic.service.PropertyValueService')
 
-    time.sleep(500)
+    # time.sleep(500)

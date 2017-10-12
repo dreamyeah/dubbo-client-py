@@ -34,5 +34,5 @@ class ReferenceConfig(object):
 
 
 if __name__ == '__main__':
-    application_config = ApplicationConfig('test_app', version='2.0.0', owner='caozupeng', error='ssd')
+    application_config = ApplicationConfig('test_app', version='1.0', error='ssd')
     print application_config

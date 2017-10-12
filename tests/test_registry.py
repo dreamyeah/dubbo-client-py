@@ -4,15 +4,15 @@ __author__ = 'caozupeng'
 
 
 def multicat():
-    registry = MulticastRegistry('224.5.6.7:1234')
-    registry.subscribe('com.ofpay.demo.api.UserProvider')
-    print registry.get_providers('com.ofpay.demo.api.UserProvider')
+    registry = MulticastRegistry('10.165.124.205:2181')
+    registry.subscribe('com.netease.pop.ic.service.ProvinceService')
+    print registry.get_providers('com.netease.pop.ic.service.ProvinceService')
 
 
 def zookeeper():
-    registry = ZookeeperRegistry('172.19.65.33:2181')
-    registry.subscribe('com.ofpay.demo.api.UserProvider')
-    print registry.get_providers('com.ofpay.demo.api.UserProvider')
+    registry = ZookeeperRegistry('10.165.124.205:2181')
+    registry.subscribe('com.netease.pop.ic.service.ProvinceService')
+    print registry.get_providers('com.netease.pop.ic.service.ProvinceService')
 
 
 def test_registry():
@@ -33,4 +33,4 @@ def test_registry():
 
 
 if __name__ == '__main__':
-    multicat()
+    zookeeper()
